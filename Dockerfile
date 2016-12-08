@@ -4,7 +4,6 @@ FROM golang
 
 # Copy the local package files to the container's workspace.
 ADD . /go/src/gweb
-ADD /src/. /go/src
 
 WORKDIR /go/src/gweb
 
