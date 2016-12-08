@@ -2,4 +2,4 @@
 
 ----
 ## Lets get started - sign into AWS
-[[https://github.com/jcutrono/itpalooza16/blob/master/pics/dashboard.png]]
+[[itpalooza16/pics/dashboard.png]]
