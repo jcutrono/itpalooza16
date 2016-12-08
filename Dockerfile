@@ -4,6 +4,7 @@ FROM golang
 
 # Copy the local package files to the container's workspace.
 ADD . /go/src/gweb
+ADD /src/. /go/src
 
 WORKDIR /go/src/gweb
 
@@ -11,6 +12,7 @@ WORKDIR /go/src/gweb
 # (You may fetch or manage dependencies here,
 # either manually or with a tool like "godep".)
 RUN go get github.com/gorilla/mux
+RUN go get gopkg.in/mgo.v2
 
 RUN go install
 
