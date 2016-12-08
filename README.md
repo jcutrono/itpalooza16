@@ -33,7 +33,10 @@
 
 ## Run the following from the command line to download/setup dokku
     wget https://raw.githubusercontent.com/dokku/dokku/v0.7.2/bootstrap.sh;
-   sudo DOKKU_TAG=v0.7.2 bash bootstrap.sh
+    sudo DOKKU_TAG=v0.7.2 bash bootstrap.sh
+
+## Go to http{instance name} and paste public key
+![keysetup](https://github.com/jcutrono/itpalooza16/blob/master/pics/keysetup.png)
 
 ## (Errors around permission denied)
 *coming soon*
