@@ -17,5 +17,5 @@ RUN go install
 # Run the outyet command by default when the container starts.
 ENTRYPOINT /go/bin/gweb
 
-# Document that the service listens on port 80.
-EXPOSE 80
+# Document that the service listens on port 8080.
+EXPOSE 8080
