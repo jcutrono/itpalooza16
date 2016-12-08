@@ -35,6 +35,7 @@ func initializeApi(router *mux.Router) {
 	apiRoutes := router.PathPrefix("/api").Subrouter()
 
 	// setup api controllers
+	Configure(apiRoutes)
 
 	apiRoutes.Headers("Access-Control-Allow-Origin", "*")
 	apiRoutes.Headers("Content-Type", "application/json")
