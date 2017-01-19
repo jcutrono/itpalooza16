@@ -3,7 +3,7 @@ import groovy.json.JsonOutput
 
 // Loads the standardBuild function/step from workflowLibs.git/vars/standardBuild.groovy
 // and invokes it.
-standardBuild {
+build {
     environment = 'golang:1.7.0'
     mainScript = '''
 go version
