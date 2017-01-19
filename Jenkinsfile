@@ -1,40 +1,28 @@
-#!/usr/bin/groovy
-def utils = new io.fabric8.Utils()
+#!groovy
+import groovy.json.JsonOutput
 
-node {
-  def envStage = utils.environmentNamespace('staging')
-  def envProd = utils.environmentNamespace('production')
+// Loads the standardBuild function/step from workflowLibs.git/vars/standardBuild.groovy
+// and invokes it.
+standardBuild {
+    environment = 'golang:1.7.0'
+    mainScript = '''
+go version
+go build -v hello-world.go
+'''
+    postScript = '''
+ls -l
+./hello-world
+'''
+}
 
-  git GIT_URL
-
-  stage 'Canary release'
-  echo 'NOTE: running pipelines for the first time will take longer as build and base docker images are pulled onto the node'
-  if (!fileExists ('Dockerfile')) {
-    writeFile file: 'Dockerfile', text: 'FROM golang:onbuild'
-  }
-
-  def newVersion = performCanaryRelease {}
-
-  def rc = getKubernetesJson {
-    port = 8080
-    label = 'golang'
-    icon = 'https://cdn.rawgit.com/fabric8io/fabric8/dc05040/website/src/images/logos/gopher.png'
-    version = newVersion
-    imageName = clusterImageName
-  }
-
-  stage 'Rolling upgrade Staging'
-  kubernetesApply(file: rc, environment: envStage)
-
-  stage 'Approve'
-  approve{
-    room = null
-    version = canaryVersion
-    console = fabric8Console
-    environment = envStage
-  }
-
-  stage 'Rolling upgrade Production'
-  kubernetesApply(file: rc, environment: envProd)
-
+// Add whichever params you think you'd most want to have
+// replace the slackURL below with the hook url provided by
+// slack when you configure the webhook
+def notifySlack(text) {
+    def slackURL = 'https://hooks.slack.com/services/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'
+    def payload = JsonOutput.toJson([text      : text,
+                                     channel   : "#ci",
+                                     username  : "jenkins",
+                                     icon_emoji: ":jenkins:"])
+    sh "curl -X POST --data-urlencode \'payload=${payload}\' ${slackURL}"
 }
