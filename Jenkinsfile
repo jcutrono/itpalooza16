@@ -17,12 +17,14 @@ node {
 		// map artifacts to Jenkins builds
 		sh "${mvnHome}/bin/mvn versions:set -DnewVersion=${env.BUILD_NUMBER}"
 		sh "${mvnHome}/bin/mvn package"
-		}
-		stage 'test'
+	}
+	
+	stage ('test') {
 		parallel 'test': {
-		sh "${mvnHome}/bin/mvn test; sleep 2;"
+			sh "${mvnHome}/bin/mvn test; sleep 2;"
 		}, 'verify': {
-		sh "${mvnHome}/bin/mvn verify; sleep 3"
+			sh "${mvnHome}/bin/mvn verify; sleep 3"
+		}
 	}
 
 	stage ('archive') {
