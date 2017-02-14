@@ -1,7 +1,6 @@
 node {
 	// Mark the code checkout 'stage'....
 	stage ('checkout') {
-
 		// Get some code from a GitHub repository
 		git url: 'https://github.com/jcutrono/itpalooza16'
 		sh 'git clean -fdx; sleep 4;'
