@@ -14,6 +14,7 @@ node {
 	stage ('build') {
 		// set the version of the build artifact to the Jenkins BUILD_NUMBER so you can
 		// map artifacts to Jenkins builds
+		sh "go version"
 		sh "go build -i"
 	}
 	
