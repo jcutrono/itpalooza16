@@ -15,6 +15,7 @@ node {
 		// set the version of the build artifact to the Jenkins BUILD_NUMBER so you can
 		// map artifacts to Jenkins builds
 		sh "export GOPATH=${goTool}/bin"
+		sh "export GOROOT=$GOPATH"
 		sh "${goTool}/bin/go version"
 		sh "go build -i"
 	}
