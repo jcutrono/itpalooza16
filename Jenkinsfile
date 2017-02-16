@@ -10,13 +10,13 @@ node {
 	// ** NOTE: This 'mvn' maven tool must be configured
 	// **       in the global configuration.	
 	def goTool = tool 'go'
+	environment{
+		GOPATH="${goTool}/bin"
+	}
 	
 	stage ('build') {
 		// set the version of the build artifact to the Jenkins BUILD_NUMBER so you can
-		// map artifacts to Jenkins builds
-		environment{
-			GOPATH="${goTool}/bin"
-		}
+		// map artifacts to Jenkins builds		
 		sh "go get ./..."
 		sh "go build -i"
 	}
