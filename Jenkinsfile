@@ -16,6 +16,8 @@ node {
 		// map artifacts to Jenkins builds
 		sh "export GOPATH=${goTool}/bin"
 		sh "export GOROOT=${goTool}/bin"
+		sh "${goTool}/bin/go env"
+		sh "echo GOPATH"
 		sh "${goTool}/bin/go version"
 		sh "go build -i"
 	}
