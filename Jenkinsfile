@@ -16,8 +16,8 @@ node {
 		// map artifacts to Jenkins builds		
 		sh "export GOPATH=$HOME/go-plugins"
 		sh "go env"
-		sh "go install github.com/gorilla/mux"
-		sh "go install gopkg.in/mgo.v2"
+		sh "go get github.com/gorilla/mux"
+		sh "go get gopkg.in/mgo.v2"
 		sh "go build -i"
 	}
 	
