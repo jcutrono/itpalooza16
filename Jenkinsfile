@@ -14,7 +14,7 @@ node {
 	stage ('build') {
 		// set the version of the build artifact to the Jenkins BUILD_NUMBER so you can
 		// map artifacts to Jenkins builds		
-		sh "export GOPATH=$HOME/go-plugins"
+		env.GOPATH=$HOME/go-plugins
 		sh "go env"
 		sh "go get github.com/gorilla/mux"
 		sh "go get gopkg.in/mgo.v2"
